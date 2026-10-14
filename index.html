@@ -4,20 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="The personal portfolio of Kyle Sowatsky.">
-
-  <title>Kyle Sowatsky — Portfolio</title>
+  <title>Kyle Sowatsky</title>
 
   <style>
     :root {
-      --background: #09090b;
-      --surface: #111114;
-      --surface-hover: #18181d;
+      --phone: #18181b;
+      --screen: #09090b;
+      --card: #18181b;
+      --card-hover: #222225;
       --text: #f4f4f5;
       --muted: #a1a1aa;
       --accent: #a3e635;
       --border: #27272a;
-      --radius: 16px;
     }
 
     * {
@@ -30,303 +28,513 @@
 
     body {
       margin: 0;
-      background: var(--background);
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at center,
+          #27272a 0%,
+          #09090b 55%,
+          #000000 100%
+        );
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Segoe UI",
         sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 40px 20px;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* =========================================
+       PHONE
+       ========================================= */
+
+    .phone {
+      position: relative;
+
+      width: min(390px, 100%);
+      height: 780px;
+
+      background: #050505;
+
+      border: 8px solid #202023;
+      border-radius: 48px;
+
+      box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.7),
+        0 0 0 1px #3f3f46;
+
+      overflow: hidden;
     }
 
-    a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 5px;
+    /* Phone side buttons */
+
+    .phone::before {
+      content: "";
+
+      position: absolute;
+
+      left: -11px;
+      top: 130px;
+
+      width: 4px;
+      height: 70px;
+
+      background: #3f3f46;
+
+      border-radius: 4px;
     }
 
-    .container {
-      width: min(100% - 40px, 900px);
-      margin: 0 auto;
+    .phone::after {
+      content: "";
+
+      position: absolute;
+
+      right: -11px;
+      top: 170px;
+
+      width: 4px;
+      height: 100px;
+
+      background: #3f3f46;
+
+      border-radius: 4px;
     }
 
-    /* Navigation */
+    /* =========================================
+       SCREEN
+       ========================================= */
 
-    header {
-      border-bottom: 1px solid var(--border);
+    .screen {
+      width: 100%;
+      height: 100%;
+
+      background: var(--screen);
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: hidden;
     }
 
-    nav {
-      min-height: 76px;
+    /* =========================================
+       STATUS BAR
+       ========================================= */
+
+    .status-bar {
+      height: 44px;
+
+      padding: 0 22px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      flex-shrink: 0;
     }
 
-    .logo {
-      font-size: 1rem;
+    .status-right {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+    }
+
+    .signal span {
+      display: block;
+      width: 3px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+
+    .signal span:nth-child(1) {
+      height: 4px;
+    }
+
+    .signal span:nth-child(2) {
+      height: 7px;
+    }
+
+    .signal span:nth-child(3) {
+      height: 10px;
+    }
+
+    .battery {
+      width: 21px;
+      height: 10px;
+
+      border: 1px solid var(--muted);
+      border-radius: 3px;
+
+      padding: 1px;
+    }
+
+    .battery::after {
+      content: "";
+
+      display: block;
+
+      width: 70%;
+      height: 100%;
+
+      background: var(--text);
+      border-radius: 1px;
+    }
+
+    /* =========================================
+       DYNAMIC ISLAND
+       ========================================= */
+
+    .dynamic-island {
+      position: absolute;
+
+      top: 12px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: 105px;
+      height: 28px;
+
+      background: #000;
+
+      border-radius: 20px;
+
+      z-index: 10;
+    }
+
+    /* =========================================
+       APP HEADER
+       ========================================= */
+
+    .app-header {
+      padding: 20px 22px 18px;
+
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      flex-shrink: 0;
+    }
+
+    .app-title {
+      font-size: 1.35rem;
       font-weight: 750;
+
       letter-spacing: -0.04em;
     }
 
-    .logo span {
+    .app-title span {
       color: var(--accent);
     }
 
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
+    .menu-icon {
+      width: 36px;
+      height: 36px;
 
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    /* Hero */
-
-    .hero {
-      padding: 110px 0 100px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 650;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
+      border: 1px solid var(--border);
       border-radius: 50%;
-    }
 
-    h1 {
-      max-width: 780px;
-      margin: 24px 0;
-      font-size: clamp(2.8rem, 8vw, 5.5rem);
-      line-height: 1.04;
-      letter-spacing: -0.075em;
-      font-weight: 750;
-    }
-
-    h1 span {
-      color: var(--accent);
-    }
-
-    .hero-description {
-      max-width: 620px;
-      color: var(--muted);
-      font-size: 1.1rem;
-    }
-
-    .hero-actions {
       display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 32px;
-    }
-
-    .button {
-      display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 10px 18px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: background 0.2s, border-color 0.2s;
+
+      color: var(--muted);
+
+      font-size: 15px;
     }
 
-    .button-primary {
-      background: var(--accent);
-      color: #101207;
-      border-color: var(--accent);
+    /* =========================================
+       CONTENT
+       ========================================= */
+
+    .content {
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding: 24px 20px 30px;
+
+      scrollbar-width: none;
     }
 
-    .button-primary:hover {
-      background: #bef264;
+    .content::-webkit-scrollbar {
+      display: none;
     }
 
-    .button-secondary:hover {
-      background: var(--surface-hover);
-      border-color: #52525b;
+    /* =========================================
+       PROFILE
+       ========================================= */
+
+    .profile {
+      padding: 10px 2px 28px;
     }
 
-    /* General sections */
+    .profile-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
 
-    section.content-section {
-      padding: 64px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-heading {
-      margin-bottom: 30px;
-    }
-
-    .section-label {
       color: var(--accent);
-      font-size: 0.75rem;
+
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+
       text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
-    h2 {
-      margin: 8px 0;
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      line-height: 1.2;
-      letter-spacing: -0.05em;
+    .profile-dot {
+      width: 7px;
+      height: 7px;
+
+      background: var(--accent);
+
+      border-radius: 50%;
+
+      box-shadow: 0 0 10px rgba(163, 230, 53, 0.5);
     }
 
-    .section-description {
-      max-width: 620px;
+    .profile h1 {
+      margin: 14px 0 8px;
+
+      font-size: 2.6rem;
+      line-height: 1;
+
+      letter-spacing: -0.07em;
+    }
+
+    .profile-subtitle {
+      margin: 0;
+
       color: var(--muted);
-      margin: 12px 0 0;
+
+      font-size: 0.9rem;
     }
 
-    /* About */
+    /* =========================================
+       SECTIONS
+       ========================================= */
 
-    .about-copy {
-      max-width: 720px;
-      color: var(--muted);
-    }
-
-    .about-copy p {
+    .section {
       margin-bottom: 22px;
     }
 
-    /* Placeholder cards */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    .placeholder-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      margin-bottom: 10px;
     }
 
-    .placeholder-card {
-      min-height: 210px;
-      padding: 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .placeholder-card:hover {
-      background: var(--surface-hover);
-      border-color: #52525b;
-    }
-
-    .placeholder-icon {
-      display: block;
-      margin-bottom: 18px;
-      color: var(--accent);
-      font-size: 1.5rem;
-    }
-
-    .placeholder-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.15rem;
-      letter-spacing: -0.025em;
-    }
-
-    .placeholder-card p {
+    .section-title {
       margin: 0;
+
+      font-size: 0.72rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+
       color: var(--muted);
-      font-size: 0.9rem;
     }
 
-    .placeholder-note {
-      display: inline-block;
-      margin-top: 18px;
-      color: var(--accent);
-      font-size: 0.78rem;
+    .section-number {
+      color: #52525b;
+
+      font-size: 0.7rem;
       font-weight: 600;
     }
 
-    /* Contact */
+    /* =========================================
+       ABOUT CARD
+       ========================================= */
 
-    .contact-card {
-      padding: 32px;
-      background: var(--surface);
+    .about-card {
+      padding: 20px;
+
+      background: var(--card);
+
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 18px;
     }
 
-    .contact-card p {
-      max-width: 580px;
+    .about-card p {
+      margin: 0 0 16px;
+
       color: var(--muted);
+
+      font-size: 0.88rem;
+      line-height: 1.75;
     }
 
-    /* Footer */
-
-    footer {
-      padding: 28px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.8rem;
+    .about-card p:last-child {
+      margin-bottom: 0;
     }
 
-    .footer-content {
+    .about-card strong {
+      color: var(--text);
+    }
+
+    /* =========================================
+       LINK CARDS
+       ========================================= */
+
+    .links {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .ai-disclosure {
-      color: #71717a;
+    .link-card {
+      min-height: 62px;
+
+      padding: 10px 14px;
+
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      transition:
+        background 0.2s,
+        transform 0.2s,
+        border-color 0.2s;
     }
 
-    /* Mobile */
+    .link-card:hover {
+      background: var(--card-hover);
 
-    @media (max-width: 600px) {
-      .container {
-        width: min(100% - 32px, 900px);
+      border-color: #3f3f46;
+
+      transform: translateY(-1px);
+    }
+
+    .link-icon {
+      width: 40px;
+      height: 40px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #27272a;
+
+      border-radius: 12px;
+
+      color: var(--text);
+
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    .link-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-name {
+      display: block;
+
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    .link-description {
+      display: block;
+
+      margin-top: 1px;
+
+      color: var(--muted);
+
+      font-size: 0.72rem;
+    }
+
+    .link-arrow {
+      color: #52525b;
+
+      font-size: 1rem;
+    }
+
+    /* =========================================
+       HOME INDICATOR
+       ========================================= */
+
+    .home-area {
+      height: 32px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      flex-shrink: 0;
+    }
+
+    .home-indicator {
+      width: 105px;
+      height: 4px;
+
+      background: #f4f4f5;
+
+      border-radius: 10px;
+    }
+
+    /* =========================================
+       SMALL SCREENS
+       ========================================= */
+
+    @media (max-height: 700px) {
+      body {
+        padding: 20px;
       }
 
-      nav {
-        min-height: 68px;
+      .phone {
+        height: 90vh;
+      }
+    }
+
+    @media (max-width: 430px) {
+      body {
+        padding: 0;
       }
 
-      .nav-links {
-        gap: 14px;
-        font-size: 0.8rem;
+      .phone {
+        width: 100%;
+        height: 100vh;
+
+        border: none;
+        border-radius: 0;
+
+        box-shadow: none;
       }
 
-      .hero {
-        padding: 78px 0 68px;
-      }
-
-      .hero-description {
-        font-size: 1rem;
-      }
-
-      section.content-section {
-        padding: 48px 0;
-      }
-
-      .placeholder-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-card {
-        padding: 24px;
+      .phone::before,
+      .phone::after {
+        display: none;
       }
     }
 
@@ -336,8 +544,7 @@
       }
 
       *,
-      *::before,
-      *::after {
+      *::before {
         transition: none !important;
       }
     }
@@ -346,238 +553,241 @@
 
 <body>
 
-  <header>
-    <div class="container">
-      <nav aria-label="Main navigation">
-        <a class="logo" href="#home">KS<span>.</span></a>
+  <div class="phone">
 
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#in-progress">In Progress</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+    <div class="screen">
 
-  <main>
+      <!-- Simulated iPhone Dynamic Island -->
+      <div class="dynamic-island"></div>
 
-    <!-- HERO: Introduce yourself and give visitors a quick
-         overview of what you do or what interests you. -->
+      <!-- Status Bar -->
+      <div class="status-bar">
 
-    <div class="container">
-      <section class="hero" id="home"
-        style="border-top: none;">
+        <span>9:41</span>
 
-        <div class="eyebrow">
-          <span class="status-dot"></span>
-          Personal Portfolio
-        </div>
+        <div class="status-right">
 
-        <h1>
-          Kyle Sowatsky<span>.</span><br>
-          Welcome to my corner of the internet.
-        </h1>
-
-        <p class="hero-description">
-          A personal space for my projects, experiments,
-          and ongoing exploration of technology.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button button-primary" href="#projects">
-            Explore Projects &darr;
-          </a>
-
-          <a class="button button-secondary" href="#about">
-            About Me
-          </a>
-        </div>
-      </section>
-    </div>
-
-    <!-- ABOUT: Your original text, preserved as provided. -->
-
-    <section class="content-section" id="about">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-label">01 / About</span>
-          <h2>A little about me.</h2>
-        </div>
-
-        <div class="about-copy">
-          <p>
-            Welcome to my simple site! This entire site was made
-            completely on the one device I own (an iphone 15 pro).
-            Being constrained to the mobile form factor was a fun
-            challenge and I want to see how far I can take coding
-            and system administration on a single device that is
-            always with me. Below are links my other projects.
-          </p>
-
-          <p>
-            AI usage disclosure: I have used AI for the development
-            of this page but all text was written by me.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS: Feature completed projects. Add project names,
-         descriptions, technologies, screenshots, and live links. -->
-
-    <section class="content-section" id="projects">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-label">02 / Portfolio</span>
-          <h2>Projects.</h2>
-          <p class="section-description">
-            [Describe the projects you have completed and want
-            visitors to explore. Highlight what each project does,
-            what you learned, and where people can try it or view
-            its source code.]
-          </p>
-        </div>
-
-        <div class="placeholder-grid">
-          <article class="placeholder-card">
-            <span class="placeholder-icon">&#60;/&#62;</span>
-            <h3>[Project Name]</h3>
-            <p>
-              [Explain the purpose of this project, the problem
-              it solves, and the tools or technologies you used.]
-            </p>
-            <span class="placeholder-note">
-              [Live Demo / Source Code]
-            </span>
-          </article>
-
-          <article class="placeholder-card">
-            <span class="placeholder-icon">&#9734;</span>
-            <h3>[Project Name]</h3>
-            <p>
-              [Describe another completed project, its key
-              features, and why you decided to build it.]
-            </p>
-            <span class="placeholder-note">
-              [Live Demo / Source Code]
-            </span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- IN PROGRESS: Share current projects, experiments,
-         development updates, and what you plan to build next. -->
-
-    <section class="content-section" id="in-progress">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-label">03 / The Workshop</span>
-          <h2>Currently in progress.</h2>
-          <p class="section-description">
-            [Describe the projects and experiments you are
-            actively working on. Share your current progress,
-            challenges, goals, and what you hope to accomplish.]
-          </p>
-        </div>
-
-        <div class="placeholder-grid">
-          <article class="placeholder-card">
-            <span class="placeholder-icon">&#9881;</span>
-            <h3>[Work in Progress #1]</h3>
-            <p>
-              [Explain the idea, its current development stage,
-              and the next milestone you are working toward.]
-            </p>
-            <span class="placeholder-note">
-              [In Development]
-            </span>
-          </article>
-
-          <article class="placeholder-card">
-            <span class="placeholder-icon">&#10022;</span>
-            <h3>[Work in Progress #2]</h3>
-            <p>
-              [Introduce another ongoing project, technical
-              experiment, or idea you are exploring.]
-            </p>
-            <span class="placeholder-note">
-              [Research / Early Prototype]
-            </span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS & TOOLS: List languages, frameworks, software,
-         and system administration tools you use or are learning. -->
-
-    <section class="content-section" id="skills">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-label">04 / Toolkit</span>
-          <h2>Skills & tools.</h2>
-          <p class="section-description">
-            [List the programming languages, technologies,
-            development environments, AI tools, and system
-            administration skills you have experience with.
-            You can also mention what you are currently learning.]
-          </p>
-        </div>
-
-        <div class="placeholder-card">
-          <span class="placeholder-icon">&#9881;</span>
-          <h3>[Your Technology Stack]</h3>
-          <p>
-            [For example: HTML, CSS, Python, Git, Linux,
-            command-line tools, APIs, and cloud platforms.
-            Only include technologies relevant to your experience.]
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT: Tell visitors how to reach you or find you
-         on other platforms. Only add links you want to share. -->
-
-    <section class="content-section" id="contact">
-      <div class="container">
-        <div class="contact-card">
-          <span class="section-label">05 / Contact</span>
-          <h2>Let's connect.</h2>
-
-          <p>
-            [Write a short invitation for visitors to contact you.
-            You could mention collaboration, technical discussions,
-            project feedback, or opportunities you are interested in.]
-          </p>
-
-          <div class="hero-actions">
-            <a class="button button-secondary" href="#contact">
-              [Your Email or Social Link]
-            </a>
+          <div class="signal">
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
+
+          <span>Wi-Fi</span>
+
+          <div class="battery"></div>
+
         </div>
+
       </div>
-    </section>
 
-  </main>
 
-  <!-- FOOTER: Add copyright information, your AI disclosure,
-       or other brief details about the site. -->
+      <!-- App Header -->
+      <header class="app-header">
 
-  <footer>
-    <div class="container footer-content">
-      <span>&copy; 2026 Kyle Sowatsky</span>
+        <div class="app-title">
+          Kyle<span>.</span>
+        </div>
 
-      <span class="ai-disclosure">
-        [Add a brief note about the site, its development,
-        or your AI usage disclosure.]
-      </span>
+        <div class="menu-icon">
+          •••
+        </div>
+
+      </header>
+
+
+      <!-- Scrollable App Content -->
+      <main class="content">
+
+        <!-- Profile -->
+        <div class="profile">
+
+          <div class="profile-label">
+            <span class="profile-dot"></span>
+            Personal site
+          </div>
+
+          <h1>
+            Kyle<br>
+            Sowatsky.
+          </h1>
+
+          <p class="profile-subtitle">
+            Building, experimenting & figuring things out.
+          </p>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <section class="section" id="about">
+
+          <div class="section-header">
+
+            <h2 class="section-title">
+              About
+            </h2>
+
+            <span class="section-number">
+              01
+            </span>
+
+          </div>
+
+
+          <div class="about-card">
+
+            <p>
+              Welcome to my simple site! This entire site was
+              made completely on the one device I own (an iphone
+              15 pro). Being constrained to the mobile form factor
+              was a fun challenge and I want to see how far I can
+              take coding and system administration on a single
+              device that is always with me. Below are links my
+              other projects.
+            </p>
+
+            <p>
+              AI usage disclosure: I have used AI for the
+              development of this page but all text was written
+              by me.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- EXTERNAL LINKS -->
+
+        <section class="section" id="links">
+
+          <div class="section-header">
+
+            <h2 class="section-title">
+              Elsewhere
+            </h2>
+
+            <span class="section-number">
+              02
+            </span>
+
+          </div>
+
+
+          <div class="links">
+
+            <!-- GitHub -->
+
+            <a
+              class="link-card"
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+
+              <div class="link-icon">
+                GH
+              </div>
+
+              <div class="link-info">
+
+                <span class="link-name">
+                  GitHub
+                </span>
+
+                <span class="link-description">
+                  Code & projects
+                </span>
+
+              </div>
+
+              <span class="link-arrow">
+                ↗
+              </span>
+
+            </a>
+
+
+            <!-- LinkedIn -->
+
+            <a
+              class="link-card"
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+
+              <div class="link-icon">
+                in
+              </div>
+
+              <div class="link-info">
+
+                <span class="link-name">
+                  LinkedIn
+                </span>
+
+                <span class="link-description">
+                  Professional profile
+                </span>
+
+              </div>
+
+              <span class="link-arrow">
+                ↗
+              </span>
+
+            </a>
+
+
+            <!-- ADD MORE LINKS HERE -->
+
+            <a
+              class="link-card"
+              href="#"
+            >
+
+              <div class="link-icon">
+                +
+              </div>
+
+              <div class="link-info">
+
+                <span class="link-name">
+                  Another site
+                </span>
+
+                <span class="link-description">
+                  Add another profile or project
+                </span>
+
+              </div>
+
+              <span class="link-arrow">
+                ↗
+              </span>
+
+            </a>
+
+          </div>
+
+        </section>
+
+
+      </main>
+
+
+      <!-- Home Indicator -->
+
+      <div class="home-area">
+        <div class="home-indicator"></div>
+      </div>
+
     </div>
-  </footer>
+
+  </div>
 
 </body>
 </html>
